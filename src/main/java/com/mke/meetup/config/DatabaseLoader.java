@@ -29,27 +29,35 @@ public class DatabaseLoader implements CommandLineRunner {
 	
 	@Override
 	public void run(String... arg0) throws Exception {
-		Authority userAuthority = new Authority("ROLE_USER");
-		Authority adminAuthority = new Authority("ROLE_ADMIN");
+		setupUsers();
+	}
+
+	private void setupUsers() {
+		Authority userAuthority = createAuthority("ROLE_USER");
+		Authority adminAuthority = createAuthority("ROLE_ADMIN");
 		
-		authorityRepository.save(userAuthority);
-		authorityRepository.save(adminAuthority);
-		
-		List<Authority> adminRoles = Arrays.asList(userAuthority, adminAuthority);
 		List<Authority> userRoles = Arrays.asList(userAuthority);
-		
-		SiteUser user = new SiteUser();
-		user.setUsername("user");
-		user.setPassword(passwordEncoder.encode("user"));
-		user.getAuthorities().addAll(userRoles);
-		
-		SiteUser admin = new SiteUser();
-		admin.setUsername("admin");
-		admin.setPassword(passwordEncoder.encode("admin"));
-		user.getAuthorities().addAll(adminRoles);
+		List<Authority> adminRoles = Arrays.asList(userAuthority, adminAuthority);
+
+		SiteUser user = createSiteUser("user", "user", userRoles);
+		SiteUser admin = createSiteUser("admin", "admin", adminRoles);
 		
 		siteUserRepository.save(user);
-		siteUserRepository.save(admin);
+		siteUserRepository.save(admin);		
+	}
+
+	private SiteUser createSiteUser(String username, String password, List<Authority> roles) {
+		SiteUser user = new SiteUser();
+		user.setUsername(username);
+		user.setPassword(passwordEncoder.encode(password));
+		user.getAuthorities().addAll(roles);
+		return user;
+	}
+
+	private Authority createAuthority(String role) {
+		Authority userAuthority = new Authority(role);
+		authorityRepository.save(userAuthority);
+		return userAuthority;
 	}
 
 }

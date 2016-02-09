@@ -6,4 +6,7 @@ import com.mke.meetup.domain.Authority;
 
 public interface AuthorityRepository extends CrudRepository<Authority, String> {
 
+	String USER = "ROLE_USER";
+	String ADMIN = "ROLE_ADMIN";
+
 }

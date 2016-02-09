@@ -21,6 +21,10 @@ public class Authority {
 	@Id
 	private String authority;
 	
+	public String getAuthority() {
+		return authority;
+	}
+	
 	public GrantedAuthority toGrantedAuthority() {
 		return new SimpleGrantedAuthority(authority); 
 	}

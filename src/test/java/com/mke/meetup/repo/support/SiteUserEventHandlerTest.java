@@ -23,7 +23,7 @@ public class SiteUserEventHandlerTest {
 		SiteUser user = new SiteUser();
 		user.setPassword("user");
 		
-		handler.hashPassword(user);
+		handler.setDefaults(user);
 		
 		assertNotEquals("user", user.getPassword());
 	}

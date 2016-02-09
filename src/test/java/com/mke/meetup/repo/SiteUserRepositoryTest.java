@@ -24,7 +24,7 @@ public class SiteUserRepositoryTest {
 	
 	@Test
 	public void findOne_PasswordShouldBeHashed() {
-		SiteUser admin = siteUserRepository.findOne("admin");
+		SiteUser admin = siteUserRepository.findOneByUsername("admin");
 		
 		assertNotEquals("admin", admin.getPassword());
 		assertTrue(passwordEncoder.matches("admin", admin.getPassword()));
