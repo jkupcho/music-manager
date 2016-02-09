@@ -34,7 +34,7 @@
   <body>
 
     <div class="container">
-      <div th:if="${param.error}">
+      <div class="col-md-offset-2 col-md-8 alert alert-danger" th:if="${param.error}">
         Invalid username and password.
       </div>
       <form class="form-signin" th:action="@{/login}" method="post">
