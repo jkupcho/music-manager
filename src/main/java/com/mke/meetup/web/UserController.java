@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class User {
+public class UserController {
 
 	@RequestMapping("/user")
 	public ResponseEntity<UserDetails> userDetails(Authentication authentication) {
