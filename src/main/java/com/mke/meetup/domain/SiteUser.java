@@ -18,8 +18,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 public class SiteUser {
 
@@ -30,7 +28,6 @@ public class SiteUser {
 	@Column(unique=true)
 	private String username;
 	
-	@JsonIgnore
 	private String password;
 	
 	@ManyToMany(fetch=FetchType.EAGER)
