@@ -1,3 +1,4 @@
+# AuthZ and Auditing
 fetch('http://localhost:8080/api/artists', {
   method: 'post',
   credentials: 'include',
@@ -7,6 +8,7 @@ fetch('http://localhost:8080/api/artists', {
   }
 })
 
+# Event Handler
 fetch('http://localhost:8080/api/siteUsers', {
   method: 'post',
   credentials: 'include',
