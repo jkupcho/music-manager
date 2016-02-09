@@ -15,10 +15,10 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-public class MusicManagerUser {
+public class SiteUser {
 
 	@Id
-	private String email;
+	private String username;
 	
 	private String password;
 	
@@ -36,7 +36,27 @@ public class MusicManagerUser {
 			.map(Authority::toGrantedAuthority)
 			.collect(Collectors.toSet());
 		
-		return new User(email, password, secAuthorities);
+		return new User(username, password, secAuthorities);
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public Set<Authority> getAuthorities() {
+		return authorities;
+	}
+	
+	public String getUsername() {
+		return username;
+	}
+	
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 }

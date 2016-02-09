@@ -5,17 +5,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.mke.meetup.domain.MusicManagerUser;
-import com.mke.meetup.repo.MusicManagerUserRepository;
+import com.mke.meetup.domain.SiteUser;
+import com.mke.meetup.repo.SiteUserRepository;
 
 public class RepositoryUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	private MusicManagerUserRepository musicManagerUserRepository;
+	private SiteUserRepository siteUserRepository;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		MusicManagerUser user = musicManagerUserRepository.findOne(username);
+		SiteUser user = siteUserRepository.findOne(username);
 		
 		if (user == null) { throw new UsernameNotFoundException("Username: " + username + " was not found."); }
 		

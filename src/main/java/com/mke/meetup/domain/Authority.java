@@ -8,13 +8,18 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 @Entity
 public class Authority {
+	
+	/***
+	 * Needed by Hibernate.
+	 */
+	public Authority() {} 
 
-	public Authority(final String authority) {
+	public Authority(String authority) {
 		this.authority = authority;
 	}
 	
 	@Id
-	private final String authority;
+	private String authority;
 	
 	public GrantedAuthority toGrantedAuthority() {
 		return new SimpleGrantedAuthority(authority); 
