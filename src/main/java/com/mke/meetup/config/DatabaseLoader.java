@@ -43,7 +43,7 @@ public class DatabaseLoader implements CommandLineRunner {
 		SiteUser admin = createSiteUser("admin", "admin", adminRoles);
 		
 		siteUserRepository.save(user);
-		siteUserRepository.save(admin);		
+		siteUserRepository.save(admin);
 	}
 
 	private SiteUser createSiteUser(String username, String password, List<Authority> roles) {
