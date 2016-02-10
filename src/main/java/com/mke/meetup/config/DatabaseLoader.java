@@ -8,23 +8,35 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import com.mke.meetup.domain.Album;
 import com.mke.meetup.domain.Authority;
 import com.mke.meetup.domain.SiteUser;
+import com.mke.meetup.domain.Song;
+import com.mke.meetup.repo.AlbumRepository;
 import com.mke.meetup.repo.AuthorityRepository;
 import com.mke.meetup.repo.SiteUserRepository;
+import com.mke.meetup.repo.SongRepository;
 
 @Component
 public class DatabaseLoader implements CommandLineRunner {
 
 	private final SiteUserRepository siteUserRepository;
 	private final AuthorityRepository authorityRepository;
+	private final AlbumRepository albumRepository;
+	private final SongRepository songRepository;
 	private final PasswordEncoder passwordEncoder;
 
 	@Autowired
-	public DatabaseLoader(SiteUserRepository siteUserRepository, AuthorityRepository authorityRepository, PasswordEncoder passwordEncoder) {
+	public DatabaseLoader(SiteUserRepository siteUserRepository, 
+			AuthorityRepository authorityRepository, 
+			AlbumRepository albumRepository,
+			SongRepository songRepository,
+			PasswordEncoder passwordEncoder) {
 		this.siteUserRepository = siteUserRepository;
 		this.authorityRepository = authorityRepository;
 		this.passwordEncoder = passwordEncoder;
+		this.albumRepository = albumRepository;
+		this.songRepository = songRepository;
 	}
 	
 	@Override
@@ -44,6 +56,21 @@ public class DatabaseLoader implements CommandLineRunner {
 		
 		siteUserRepository.save(user);
 		siteUserRepository.save(admin);
+		
+		Album album = new Album();
+		album.setName("Some Album");
+		
+		albumRepository.save(album);
+		
+		Song firstSong = new Song();
+		firstSong.setName("First Song");
+		firstSong.setAlbum(album);
+		
+		Song secondSong = new Song();
+		secondSong.setName("Second Song");
+		secondSong.setAlbum(album);
+		
+		songRepository.save(Arrays.asList(firstSong, secondSong));
 	}
 
 	private SiteUser createSiteUser(String username, String password, List<Authority> roles) {
